@@ -1,5 +1,6 @@
 # RECIPE API - SERVER SIDE
 
+Full-Stack project – server-side using NODEJS and connected to azureDB. Client-side developed using Vue.js.
 
 ## Instructions 
 For run up the server , first make sure that you have the base libraries installed for running:
