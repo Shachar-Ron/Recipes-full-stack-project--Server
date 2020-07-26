@@ -62,7 +62,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Favorites recipes
 <p align="center">
-  <img src="images/favorites.PNG" width="800"  title="hover text">
+  <img src="images/favorites.PNG" width="800" height="500"  title="hover text">
 </p>
 ### Full recipe
 <p align="center">
