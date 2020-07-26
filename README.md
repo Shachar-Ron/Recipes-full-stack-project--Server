@@ -38,7 +38,7 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-
+# 
 ### Main page
 <p align="center">
   <img src="images/main.PNG" width="800"  title="hover text">
