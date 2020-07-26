@@ -40,11 +40,17 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### Main page
+
+
 ![main](https://user-images.githubusercontent.com/57832721/88471726-04cc9280-cf15-11ea-8d8d-5bfc1764235c.PNG)
 ![main2](https://user-images.githubusercontent.com/57832721/88471739-1f067080-cf15-11ea-9efc-7ca6fdc5f400.PNG)
 ### Search Page
 ![search](https://user-images.githubusercontent.com/57832721/88471748-35143100-cf15-11ea-9d02-6be81d149dc9.PNG)
 ### Family recipes
+
+![ezgif com-crop](https://user-images.githubusercontent.com/57832721/88471869-853fc300-cf16-11ea-8d39-a7800eeab0eb.gif)
+
+
 ![familyRecipes](https://user-images.githubusercontent.com/57832721/88471753-43624d00-cf15-11ea-900e-95374b482adb.PNG)
 ### Favorites recipes
 ![favorites](https://user-images.githubusercontent.com/57832721/88471755-5248ff80-cf15-11ea-8d39-e422594bd8f1.PNG)
