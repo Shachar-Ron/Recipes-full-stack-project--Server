@@ -43,18 +43,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 <p align="center">
   <img src="images/main.PNG" width="800" height="600" title="hover text">
-  <img src="images/main2.PNG" width="800" height="600" alt="accessibility text">
+  <img src="images/main2.PNG" width="800" height="400" alt="accessibility text">
 </p>
 
 ### Search Page
 <p align="center">
-  <img src="images/search.PNG" width="800" height="600" title="hover text">
+  <img src="images/search.PNG" width="800" height="400" title="hover text">
   ![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
 </p>
 
 ### Family recipes
 <p align="center">
-  <img src="images/familyRecipes.PNG" width="800" height="600" title="hover text">
+  <img src="images/familyRecipes.PNG" width="800" height="400" title="hover text">
 ![ezgif com-crop](https://user-images.githubusercontent.com/57832721/88471869-853fc300-cf16-11ea-8d39-a7800eeab0eb.gif)
 </p>
 
@@ -62,15 +62,15 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Favorites recipes
 <p align="center">
-  <img src="images/favorites.PNG" width="800" height="600" title="hover text">
+  <img src="images/favorites.PNG" width="800" height="400" title="hover text">
 </p>
 ### Full recipe
 <p align="center">
-  <img src="images/fullRecipe.PNG" width="800" height="600" title="hover text">
+  <img src="images/fullRecipe.PNG" width="800" height="400" title="hover text">
 </p>
 ### Register
 <p align="center">
-  <img src="images/register.PNG" width="800" height="600" title="hover text">
+  <img src="images/register.PNG" width="800" height="400" title="hover text">
 </p>
 
 
