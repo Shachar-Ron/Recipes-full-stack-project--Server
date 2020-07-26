@@ -46,8 +46,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 </p>
 
 ### Search Page
-<p align="center">
   ![searchGif](https://user-images.githubusercontent.com/57832721/88472669-1f573980-cf1e-11ea-8314-98127624c19b.gif)
+
+<p align="center">
   <img src="images/search.PNG" width="600" height="500" title="hover text">
 </p>
 
@@ -56,9 +57,9 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Family recipes
 <p align="center">
   <img src="images/familyRecipes.PNG" width="800"  title="hover text">
-  ![family](https://user-images.githubusercontent.com/57832721/88472660-0ea6c380-cf1e-11ea-95cf-bfda97195ded.gif)
 
 </p>
+  ![family](https://user-images.githubusercontent.com/57832721/88472660-0ea6c380-cf1e-11ea-95cf-bfda97195ded.gif)
 
 
 
@@ -66,9 +67,10 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Favorites recipes
 <p align="center">
   <img src="images/favorites.PNG" width="600" height="500"  title="hover text">
-  ![favoriteGif](https://user-images.githubusercontent.com/57832721/88472646-e15a1580-cf1d-11ea-932d-5332918d2c26.gif)
 
 </p>
+  ![favoriteGif](https://user-images.githubusercontent.com/57832721/88472646-e15a1580-cf1d-11ea-932d-5332918d2c26.gif)
+
 ### Full recipe
 <p align="center">
   <img src="images/fullRecipe.PNG" width="800"  title="hover text">
