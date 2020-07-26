@@ -41,7 +41,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Main page
 
-  <img src="images/favoriteGif.GIF" width="800"  alt="accessibility text">
+  <gif src="images/favoriteGif.GIF" width="800"  alt="accessibility text">
 
 
 <p align="center">
