@@ -42,8 +42,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Main page
 
 <p align="center">
-  <img src="images/main.PNG" width="800" title="hover text">
-  <img src="images/main2.PNG" width="800" alt="accessibility text">
+  <img src="images/main.PNG" width="500" title="hover text">
+  <img src="images/main2.PNG" width="500" alt="accessibility text">
 </p>
 
 ![main](https://user-images.githubusercontent.com/57832721/88471726-04cc9280-cf15-11ea-8d8d-5bfc1764235c.PNG)
