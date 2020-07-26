@@ -41,25 +41,37 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Main page
 
+<p align="center">
+  <img src="images/main.PNG" width="800"  title="hover text">
+  <img src="images/main2.PNG" width="800"  alt="accessibility text">
+</p>
 
-![main](https://user-images.githubusercontent.com/57832721/88471726-04cc9280-cf15-11ea-8d8d-5bfc1764235c.PNG | width=100)
-![main2](https://user-images.githubusercontent.com/57832721/88471739-1f067080-cf15-11ea-9efc-7ca6fdc5f400.PNG | width=100)
 ### Search Page
-![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
+<p align="center">
+  <img src="images/search.PNG" width="800" height="500" title="hover text">
+  ![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
+</p>
 
-![search](https://user-images.githubusercontent.com/57832721/88471748-35143100-cf15-11ea-9d02-6be81d149dc9.PNG)
 ### Family recipes
-
+<p align="center">
+  <img src="images/familyRecipes.PNG" width="800"  title="hover text">
 ![ezgif com-crop](https://user-images.githubusercontent.com/57832721/88471869-853fc300-cf16-11ea-8d39-a7800eeab0eb.gif)
+</p>
 
 
-![familyRecipes](https://user-images.githubusercontent.com/57832721/88471753-43624d00-cf15-11ea-900e-95374b482adb.PNG)
+
 ### Favorites recipes
-![favorites](https://user-images.githubusercontent.com/57832721/88471755-5248ff80-cf15-11ea-8d39-e422594bd8f1.PNG)
+<p align="center">
+  <img src="images/favorites.PNG" width="800" height="500"  title="hover text">
+</p>
 ### Full recipe
-![fullRecipe](https://user-images.githubusercontent.com/57832721/88471764-6987ed00-cf15-11ea-8bb6-439b2ab28627.PNG)
+<p align="center">
+  <img src="images/fullRecipe.PNG" width="800"  title="hover text">
+</p>
 ### Register
-![register](https://user-images.githubusercontent.com/57832721/88471784-9b00b880-cf15-11ea-9939-438a32848815.PNG)
+<p align="center">
+  <img src="images/register.PNG" width="800" height="400" title="hover text">
+</p>
 
 
 
