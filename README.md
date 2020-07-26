@@ -1,4 +1,4 @@
-# RECIPE API - SERVER SIDE
+# RECIPE API - SERVER
 
 Full-Stack project – server-side using NODEJS and connected to azureDB. Client-side developed using Vue.js.
 
@@ -48,15 +48,17 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Search Page
 <p align="center">
   <img src="images/search.PNG" width="600" height="500" title="hover text">
-  ![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
 </p>
+  ![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
+
 
 
 ### Family recipes
 <p align="center">
   <img src="images/familyRecipes.PNG" width="800"  title="hover text">
-![ezgif com-crop](https://user-images.githubusercontent.com/57832721/88471869-853fc300-cf16-11ea-8d39-a7800eeab0eb.gif)
 </p>
+![ezgif com-crop](https://user-images.githubusercontent.com/57832721/88471869-853fc300-cf16-11ea-8d39-a7800eeab0eb.gif)
+
 
 
 
