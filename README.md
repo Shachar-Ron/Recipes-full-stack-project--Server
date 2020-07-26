@@ -37,7 +37,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-![favoriteGif](https://user-images.githubusercontent.com/57832721/88472646-e15a1580-cf1d-11ea-932d-5332918d2c26.gif)
 
 
 ### Main page
@@ -48,17 +47,18 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Search Page
 <p align="center">
+  ![searchGif](https://user-images.githubusercontent.com/57832721/88472669-1f573980-cf1e-11ea-8314-98127624c19b.gif)
   <img src="images/search.PNG" width="600" height="500" title="hover text">
 </p>
-  ![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
 
 
 
 ### Family recipes
 <p align="center">
   <img src="images/familyRecipes.PNG" width="800"  title="hover text">
+  ![family](https://user-images.githubusercontent.com/57832721/88472660-0ea6c380-cf1e-11ea-95cf-bfda97195ded.gif)
+
 </p>
-![ezgif com-crop](https://user-images.githubusercontent.com/57832721/88471869-853fc300-cf16-11ea-8d39-a7800eeab0eb.gif)
 
 
 
@@ -66,6 +66,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ### Favorites recipes
 <p align="center">
   <img src="images/favorites.PNG" width="600" height="500"  title="hover text">
+  ![favoriteGif](https://user-images.githubusercontent.com/57832721/88472646-e15a1580-cf1d-11ea-932d-5332918d2c26.gif)
+
 </p>
 ### Full recipe
 <p align="center">
