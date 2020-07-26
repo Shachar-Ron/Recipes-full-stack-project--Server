@@ -6,7 +6,7 @@ const axios = require("axios");
 
 //spoonacular settings
 const recipes_api_url="https://api.spoonacular.com/recipes";
-const api_key="apiKey=8e28c7ad7aaa4c2d9e5e93ce1fb22375";
+const api_key=`apiKey=${process.env.spooncular_apiKey}`;
 
 
 
@@ -134,8 +134,11 @@ function extractSearchResultsDataFull(recipes_Info){
             image,
             extendedIngredients,
             instructions,
+            analyzedInstructions,
             servings,
         } = recipes_Info.data;
+
+
         // return for each the rekecant information
         return {
             id: id,
@@ -146,6 +149,7 @@ function extractSearchResultsDataFull(recipes_Info){
             vegan: vegan,
             glutenFree: glutenFree,
             image: image,
+            extendedIngredients:extendedIngredients,
            ingredients: extendedIngredients.map((ingredient) => {
             const {
                 name,
@@ -160,11 +164,29 @@ function extractSearchResultsDataFull(recipes_Info){
             
         }),
             instructions: instructions,
+            // _instructions: analyzedInstructions.steps.map(i => { number: i.number, step ; i.step}),
+            analyzedInstructions: analyzedInstructions,
             servings: servings,
         }
+
+        
     });
 
+
+
 }
+
+
+// function get(){
+//     analyzedInstructions.forEach((instruction) => {
+//         for(ins of instruction.steps)
+//            instructionsAsArray.push({number:ins.number,step:ins.step})
+//     }
+// }
+        
+
+
+
 
 
 //----------------------------End----------------------------------------------------------------------------

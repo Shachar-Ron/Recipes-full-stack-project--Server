@@ -64,8 +64,26 @@ router.get("/my_recepies", async (req, res) => {
   // need to get all recipe where author = req.user_id
   try
   {
+    let emptyArray = [];
     let all_rec_of_user = await getAllRecipes(req.user_id);
+    if(!all_rec_of_user){
+      res.send(emptyArray);
+    }
     let info_arr = execRecInfo(all_rec_of_user);
+    res.send(info_arr);
+  } catch (error)
+  {
+    next(error);
+  }
+});
+
+router.get("/my_recipe/:id", async (req, res) => {
+  // need to get all recipe where author = req.user_id
+  try
+  {
+    let recipe_id= req.params.id;
+    let user_recipe = await getMyRecipe(req.user_id, recipe_id);
+    let info_arr = execRecInfo(user_recipe);
     res.send(info_arr);
   } catch (error)
   {
@@ -92,9 +110,12 @@ router.get("/get_favorite", async (req, res, next) => {
   try {
     let rec_ids = await get_favorite_ids(req.username);
     let only_rec_ids = [];
-    rec_ids.map((rec) => {
-      only_rec_ids.push(rec.rec_id);
-    })
+    if(rec_ids)
+    {
+      rec_ids.map((rec) => {
+        only_rec_ids.push(rec.rec_id);
+      })
+    }
     search_util
     .getRecipeForInformation(only_rec_ids) 
     .then((info_array) => res.send(info_array))
@@ -102,6 +123,23 @@ router.get("/get_favorite", async (req, res, next) => {
         res.sendStatus(500);
     });
     // res.send(rec_ids);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/get_favorite_ids", async (req, res, next) => {
+  try {
+    let rec_ids = await get_favorite_ids(req.username);
+    
+    let only_rec_ids = [];
+    if(rec_ids){
+      rec_ids.map((rec) => {
+        only_rec_ids.push(rec.rec_id);
+      })
+    }
+    
+    res.send(only_rec_ids);
   } catch (error) {
     next(error);
   }
@@ -163,10 +201,11 @@ router.post('/addRecipeToWatched', async (req, res) => {
 //  WORK!
 router.get('/get_last_seen_rec', async (req, res) => {
   try {
+    let rec_ids_temp = [];
     let rec_ids = await get_last_sec_rec(req.username);
     if(!rec_ids)
     {
-      res.status(401).send({ message: "No last seen recipes", success: true });
+      res.status(rec_ids_temp);
     }
     else
     {
@@ -195,6 +234,7 @@ router.get('/get_last_seen_rec', async (req, res) => {
     next(error);
   }
 });
+
 
 // WORK!
 router.get('/get_last_search', async (req, res) => {
@@ -230,6 +270,37 @@ router.post('/update_last_search', async (req, res) => {
 });
 
 
+router.post("/viewed", async (req, res) => {
+  try {
+    if(!req.body.rec_id)
+    {
+      throw { status: 405, message: "No Recipe ID.", success: false };
+    }
+    await insterViewdRecInDb(req.username, req.body.rec_id);
+    res.status(201).send({ message: "Recipe added successfully to favorites", success: true });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/get_viewed", async (req, res, next) => {
+  try {
+    let rec_ids = await get_viewed_ids(req.username);
+    let only_rec_ids = [];
+    if(rec_ids)
+    {
+      rec_ids.map((rec) => {
+        only_rec_ids.push(rec.rec_id);
+      })
+    }
+    
+    res.send(only_rec_ids);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 /**
  * Help Functions
@@ -240,6 +311,70 @@ async function getAllRecipes(user_id)
 {
   let all_user_recupies = await DButils.execQuery(`SELECT * FROM [dbo].[recipes] WHERE [recipes].[author] = '${user_id}'`);
   return all_user_recupies;
+}
+
+async function getMyRecipe(user_id, recipe_id)
+{
+  let user_recipe = await DButils.execQuery(`SELECT * FROM [dbo].[recipes] WHERE [recipes].[author] = '${user_id}' AND [recipes].[recipe_id] = '${recipe_id}'`);
+  return user_recipe;
+}
+
+
+router.get('/get_family_recipes', async (req, res) => {
+  try
+  {
+    let all_rec_of_user = await getAllFamilyRecipes(req.user_id);
+    let info_arr = execFamilyRecInfo(all_rec_of_user);
+    res.send(info_arr);
+  } catch (error)
+  {
+    next(error);
+  }
+});
+
+async function getAllFamilyRecipes(user_id)
+{
+  let all_user_recupies = await DButils.execQuery(`SELECT * FROM [dbo].[family_recipes] WHERE [family_recipes].[author] = '${user_id}'`);
+  return all_user_recupies;
+}
+
+
+function execFamilyRecInfo(recipe_info)
+{
+  return recipe_info.map((recipe) => {
+    const {
+      recipe_id,
+      author,
+      rec_name,
+      rec_image_url,
+      rec_time,
+      rec_popularity,
+      rec_vegan,
+      rec_vegetarian,
+      rec_gluten,
+      rec_ingredients,
+      instructions,
+      rec_number_of_dishes,
+      whos_rec,
+      what_holiday
+    } = recipe;
+    return {
+      id: recipe_id,
+      author_id: author,
+      title: rec_name,
+      image: rec_image_url,
+      time: rec_time,
+      popularity: rec_popularity,
+      vegan: rec_vegan,
+      vegetarian: rec_vegetarian,
+      gluten: rec_gluten,
+      ingredients: rec_ingredients,
+      instructions: instructions,
+      num_of_dishes: rec_number_of_dishes,
+      whos_rec: whos_rec,
+      what_holiday: what_holiday
+    };
+  });
 }
 
 // WORK !
@@ -324,6 +459,18 @@ async function insterFevRecInDb(username, rec_id)
   }
 }
 
+
+async function insterViewdRecInDb(username, rec_id)
+{
+  try {
+    await DButils.execQuery(
+      `INSERT INTO [dbo].[user_views] VALUES ('${username}',
+                                     '${rec_id}' )`);
+  } catch(error)
+  {
+    next(error);
+  }
+}
 // WORK!
 async function insterLastSeenRecInDb(username, rec_id1, rec_id2, rec_id3)
 {
@@ -375,4 +522,14 @@ async function get_favorite_ids(username)
   }
 }
 
+async function get_viewed_ids(username)
+{
+  try {
+    let recipe_ids = await DButils.execQuery(`SELECT rec_id FROM [dbo].[user_views] WHERE [user_views].[username] = '${username}'`);
+    return recipe_ids;
+  } catch(error)
+  {
+    next(error);
+  }
+}
 module.exports = router;

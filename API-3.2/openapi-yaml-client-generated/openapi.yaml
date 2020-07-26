@@ -1,0 +1,641 @@
+openapi: 3.0.0
+info:
+  title: Shachar and Roman API
+  description: API for assigment 3
+  contact:
+    email: shacharron101@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 3.2.1-oas3
+servers:
+- url: http://localhost:4000
+tags:
+- name: user
+  description: All authentication related routes
+- name: profile
+  description: All the user's personal app info
+- name: recipes
+  description: All reciepes general info
+paths:
+  /user/register:
+    post:
+      tags:
+      - user
+      summary: Add new user
+      description: This will add a new user to the site
+      operationId: addUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        "201":
+          description: User created
+        "400":
+          description: The request is invalid, There is empty fields.
+        "405":
+          description: E-Mail already exist
+        "409":
+          description: Username already exist
+  /user/login:
+    post:
+      tags:
+      - user
+      summary: login
+      description: Logs user into the system
+      operationId: loginUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+        required: true
+      responses:
+        "200":
+          description: login succeeded
+          headers:
+            Set-Cookie:
+              style: simple
+              explode: false
+              schema:
+                type: string
+                example: session=87s97sdhgf279293f8w0e9
+        "401":
+          description: Username or Password incorrect.
+  /user/logout:
+    get:
+      tags:
+      - user
+      description: logout for user, we delete the cookie
+      responses:
+        "200":
+          description: logout succeeded.
+        "401":
+          description: error
+      security:
+      - cookieAuth: []
+  /profile/new_rec:
+    post:
+      tags:
+      - profile
+      summary: Add new recipe
+      description: Add new recipe to the system
+      requestBody:
+        description: add user recipe
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+        required: true
+      responses:
+        "201":
+          description: Recipe added successfully to user
+        "401":
+          description: Not all fields for recipe is full.
+      security:
+      - cookieAuth: []
+  /profile/my_recepies:
+    get:
+      tags:
+      - profile
+      summary: Add new recipe
+      description: Add new recipe to the system
+      responses:
+        "201":
+          description: return all user recpies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Recipe'
+        "401":
+          description: '[]'
+      security:
+      - cookieAuth: []
+  /profile/set_favorite:
+    post:
+      tags:
+      - profile
+      summary: Add new favorite recipe
+      description: Add new favorite recipe id to the system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_1'
+        required: true
+      responses:
+        "201":
+          description: Recipe added successfully to favorites
+        "401":
+          description: No Recipe ID.
+      security:
+      - cookieAuth: []
+  /profile/get_favorite:
+    get:
+      tags:
+      - profile
+      summary: Favorite user recipes
+      description: return all user's favourite recipes
+      responses:
+        "200":
+          description: array of recipe ids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FullRecipeForSpoonacular'
+      security:
+      - cookieAuth: []
+  /profile/addRecipeToWatched:
+    post:
+      tags:
+      - profile
+      summary: Add new last seen recipe
+      description: Add new last seen recipe to the system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_2'
+        required: true
+      responses:
+        "201":
+          description: |
+            First recipe added successfully to last seen Secound recipe added successfully to last seen Third recipe added successfully to last seen Recipe added successfully to last seen
+        "401":
+          description: No Recipe ID.
+      security:
+      - cookieAuth: []
+  /profile/get_last_seen_rec:
+    get:
+      tags:
+      - profile
+      summary: last seen user recipes
+      description: return all user's last seen recipes ids
+      responses:
+        "200":
+          description: array of recipe ids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FullRecipeForSpoonacular'
+        "401":
+          description: No last seen recipes
+      security:
+      - cookieAuth: []
+  /profile/update_last_search:
+    post:
+      tags:
+      - profile
+      summary: Add last search of recipe
+      description: Add last search recipe id to the user cookie in header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_3'
+        required: true
+      responses:
+        "201":
+          description: Last search was updated
+        "401":
+          description: No last search for recipes
+      security:
+      - cookieAuth: []
+  /profile/get_last_search:
+    get:
+      tags:
+      - profile
+      summary: return user last search of recipe
+      description: return user's last search recipe
+      responses:
+        "200":
+          description: user last search
+          content:
+            application/json:
+              schema:
+                type: string
+        "401":
+          description: No last search for recipes
+      security:
+      - cookieAuth: []
+  /recipes/get_3_random_recipes:
+    get:
+      tags:
+      - recipes
+      summary: get 3 random recipes.
+      description: Return 3 recipes from all recipes fron spoonacular API
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipesList'
+        "404":
+          description: Page not found
+  /recipes/search/query/:searchQuery/amount/:num:
+    get:
+      tags:
+      - recipes
+      summary: Serach in the spoonacular API.
+      description: Serach for recipes in the spoonacular API, using a search query
+        and filter by Cusine, diet, intolerance.
+      parameters:
+      - name: searchQuery
+        in: path
+        description: The search query for the API
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: num
+        in: path
+        description: Number of search results
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          default: 5
+          enum:
+          - 5
+          - 10
+          - 15
+      - name: cuisine
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/Cuisine'
+      - name: diet
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/Diet'
+      - name: intolerances
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/Intolerances'
+      responses:
+        "200":
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipesList'
+        "404":
+          description: Unsuccessful
+  /recipes/information/Id/:recpieID:
+    get:
+      tags:
+      - recipes
+      summary: Full Recipe
+      description: Return full recipe from spoonacular API
+      parameters:
+      - name: recipeID
+        in: path
+        description: The ID of the recipe.
+        required: true
+        style: simple
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FullRecipeForSpoonacular'
+        "404":
+          description: Invalid recipe id
+components:
+  schemas:
+    User:
+      required:
+      - country
+      - email
+      - firstname
+      - imageUrl
+      - lastname
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        imageUrl:
+          type: string
+        recipes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipe'
+        family_recipes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipe'
+        user_last_seen:
+          type: array
+          items:
+            type: integer
+        user_favorites:
+          type: array
+          items:
+            type: integer
+        last_serach:
+          type: string
+      description: User object
+      example:
+        username: Shacharron101
+        firstName: Shachar
+        lastName: Ron
+        country: Israel
+        email: shacharron101@gmail.com
+        password: qwe123
+        imageUrl: https://cloudinary.com/
+        last_serach: apple
+    RecipesList:
+      type: object
+      properties:
+        randomRecipes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeForSpoonacular'
+      description: Map of resipes by id.
+    RecipeForSpoonacular:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        readyInMinutes:
+          type: integer
+        aggregateLikes:
+          type: integer
+        vegetarian:
+          type: boolean
+        vegan:
+          type: boolean
+        glutenFree:
+          type: boolean
+        image:
+          type: string
+      description: recipe object
+      example:
+        id: 660697
+        title: Southern Fried Catfish
+        readyInMinutes: "45"
+        aggregateLikes: "39"
+        vegan: "false"
+        vegetarian: "false"
+        glutenFree: "false"
+        image: https://spoonacular.com/recipeImages/660697-556x370.jpg
+    FullRecipeForSpoonacular:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        readyInMinutes:
+          type: integer
+        aggregateLikes:
+          type: integer
+        vegetarian:
+          type: boolean
+        vegan:
+          type: boolean
+        glutenFree:
+          type: boolean
+        image:
+          type: string
+        instructions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ingredients'
+        ingredients:
+          type: string
+      description: full recipe object
+      example:
+        id: 100
+        title: Pan-Seared Skirt Steak with Anchovies and Lime
+        readyInMinutes: "30"
+        aggregateLikes: "0"
+        vegan: "false"
+        vegetarian: "false"
+        glutenFree: "true"
+        image: https://spoonacular.com/recipeImages/100-556x370.jpg
+        ingredients:
+        - name: canned anchovy fillets
+          amount: 2
+          unit: ounce
+        - name: garlic clove
+          amount: 1
+          unit: large
+        - name: kosher salt
+          amount: 4
+          unit: servings
+        instructions: Rub the steaks with the lime juice and salt and pepper. Let
+          stand for 10 minutes. In a skillet, heat the olive oil. Add the steaks and
+          cook over moderately high heat, turning once, until medium-rare, 4 minutes;
+          transfer to plates and keep warm.                                            Add
+          the anchovies, scallions and garlic to the skillet and cook over moderate
+          heat, stirring, 30 seconds. Add the water and simmer until the sauce has
+          thickened, scraping up the browned bits from the bottom, 30 seconds. Pour
+          the sauce over the steaks and serve with lime wedges.
+    ingredients:
+      type: object
+      properties:
+        name:
+          type: string
+        unit:
+          type: string
+          enum:
+          - tablespoon
+          - cup
+          - quart
+          - gallon
+        amount:
+          type: number
+    Cuisine:
+      type: string
+      enum:
+      - African
+      - American
+      - British
+      - Cajun
+      - Caribbean
+      - Chinese
+      - Eastern European
+      - European
+      - French
+      - German
+      - Greek
+      - Indian
+      - Irish
+      - Italian
+      - Japanese
+      - Jewish
+      - Korean
+      - Latin American
+      - Mediterranean
+      - Mexican
+      - Middle Eastern
+      - Nordic
+      - Southern
+      - Spanish
+      - Thai
+      - Vietnamese
+    Diet:
+      type: string
+      enum:
+      - Gluten Free
+      - Ketogenic
+      - Vegetarian
+      - Lacto-Vegetarian
+      - Ovo-Vegetarian
+      - Vegan
+      - Pescetarian
+      - Paleo
+      - Primal
+      - Whole30
+    Intolerances:
+      type: string
+      enum:
+      - Dairy
+      - Egg
+      - Gluten
+      - Grain
+      - Peanut
+      - Seafood
+      - Sesame
+      - Shellfish
+      - Soy
+      - Sulfite
+      - Tree Nut
+      - Wheat
+    Recipe:
+      required:
+      - author
+      - instructions
+      - rec_gluten
+      - rec_image_url
+      - rec_ingredients
+      - rec_name
+      - rec_number_of_dishes
+      - rec_popularity
+      - rec_time
+      - rec_vegan
+      - rec_vegetarian
+      type: object
+      properties:
+        rec_id:
+          type: integer
+        author:
+          type: integer
+        rec_name:
+          type: string
+        rec_image_url:
+          type: string
+        rec_time:
+          type: integer
+        rec_popularity:
+          type: integer
+        rec_vegan:
+          type: boolean
+        rec_vegetarian:
+          type: boolean
+        rec_gluten:
+          type: boolean
+        rec_ingredients:
+          type: string
+        instructions:
+          type: string
+        rec_number_of_dishes:
+          type: integer
+      example:
+        rec_name: Pizza
+        rec_time: 10
+        rec_popularity: 10
+        rec_vegan: false
+        rec_vegetarian: false
+        rec_gluten: false
+        rec_ingredients:
+        - 1. dough
+        - 2. cheese
+        - 3. tomatos
+        - 4. olive
+        instructions: step1- Make the dough step2- Put on the dough the tomatoes,
+          cheese and olives. step3- Put the pizza in the oven to 180 degrees for 20
+          minutes.
+        rec_number_of_dishes: 2
+    body:
+      type: object
+      properties:
+        username:
+          maxLength: 8
+          minLength: 3
+          type: string
+          description: Contain only letters
+        password:
+          maxLength: 10
+          minLength: 5
+          type: string
+          description: Contains letters with at least 1 numerical character and 1
+            special characters
+      example:
+        username: roman
+        password: "1234"
+    body_1:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+      example:
+        rec_id: "32"
+    body_2:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+      example:
+        rec_id: "32"
+    body_3:
+      type: object
+      properties:
+        last_search:
+          type: integer
+      example:
+        rec_id: "32"
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      name: session
+      in: cookie

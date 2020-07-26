@@ -14,26 +14,27 @@ const api_domain = "https://api.spoonacular.com/recipes";
 
 router.get("/",(req,res) => res.send("im here"));
 
-/**
- * 1.6 - return 3 random recipes
- */  
+
 //------- /get_3_random_recipes,---------------------------------------------------------
 //---11---
 router.get("/get_3_random_recipes", (req, res) => {
+try {
   search_params = {};
   search_params.number = 3;
   search_util
   .searchForRandomRecipes(search_params)
   .then((info_array) => res.send(info_array))
   .catch((error) => {
-      res.sendStatus(500);
+      res.send(error);
   });
+} catch (error) {
+  next(error);
+}
 });
 
 /**
  * 1.7 -return all inforamtion of recipe
  */
-//-------/Information,--------------------------------------------------------------------
 
 router.get("/Information/Id/:recipeID", async (req, res, next) => {
   try {
@@ -71,7 +72,7 @@ router.get("/Information/Id/:recipeID", async (req, res, next) => {
 
  //------- /search/query/:searchQuery/amount/:num------------------------------------- 
   router.get("/search/query/:searchQuery/amount/:num", (req, res) => {
-      
+    try {  
          const {searchQuery, num} = req.params;
          search_params = {};
          search_params.query = searchQuery;
@@ -88,6 +89,10 @@ router.get("/Information/Id/:recipeID", async (req, res, next) => {
                  console.log(error);
                  res.sendStatus(500);
       });
+
+    } catch (error) {
+      next(error);
+    }
     
   }); 
 

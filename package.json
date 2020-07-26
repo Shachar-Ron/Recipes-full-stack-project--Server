@@ -1,12 +1,10 @@
 {
-  "name": "lab9",
+  "name": "assigment-3-2-roman_shachar",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start_Task": "node codes/task/main.js",
-    "start_solution": "node codes/solution/main.js",
-    "start": "node codes/solution/main.js"
+    "start": "node main.js"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +15,7 @@
     "bcryptjs": "^2.4.3",
     "client-sessions": "^0.8.0",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
     "dotenv": "^8.2.0",
     "elogin": "^0.1.4",

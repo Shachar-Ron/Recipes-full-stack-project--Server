@@ -1,6 +1,3 @@
-/////new         --------------------
-
-
 //#region express configures
 require("dotenv").config();
 //#region express configures
@@ -9,6 +6,7 @@ var path = require("path");
 const logger = require("morgan");
 const session = require("client-sessions");
 const bodyParser = require("body-parser")
+var cors = require('cors')
 
 //#endregion
 const user = require("./routes/user");
@@ -20,6 +18,14 @@ const recipes = require("./routes/recipes");
 const DButils = require("./modules/DButils");
 
 var app = express();
+app.all('*', function(req, res, next) {
+  var origin = req.get('origin'); 
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+// app.use(allowCrossDomain);
 app.use(logger("dev")); //logger
 app.use(express.json()); // parse application/json
 const port = process.env.PORT || "4000";
@@ -28,7 +34,38 @@ const port = process.env.PORT || "4000";
 app.use(bodyParser.urlencoded({extended: true})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());
 // print request logs
-app.use(express.static(path.join(__dirname, "public"))); //To serve static files such as images, CSS files, and JavaScript files
+// app.use(express.static(path.join(__dirname, "public"))); //To serve static files such as images, CSS files, and JavaScript files
+
+const corsConfig = {
+  origin: true,
+  credentials: true,
+};
+
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
+
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:8001");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+//  // Add this
+//  if (req.method === 'OPTIONS') {
+
+//       res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, OPTIONS');
+//       res.header('Access-Control-Max-Age', 120);
+//       return res.status(200).json({});
+//   }
+
+//   next();
+
+// });
 
 // autotecation
 app.use(
@@ -36,7 +73,12 @@ app.use(
     cookieName: "session", // the cookie key name
     secret: process.env.COOKIE_SECRET, // the encryption key
     duration: 20 * 60 * 1000, // expired after 20 min
-    activeDuration: 0 // if expiresIn < activeDuration,
+    activeDuration: 0, // if expiresIn < activeDuration,
+    // get cookie!!!
+    cookie: {
+      httpOnly: false,
+      sameSite: false
+    }
   })
 );
 

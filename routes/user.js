@@ -6,7 +6,6 @@ const DButils = require("../modules/DButils");
 const bcrypt = require("bcryptjs");
 
 
-// WORK`s !
 router.post("/register", async (req, res, next) => {
     try {
       // parameters exists
@@ -50,7 +49,6 @@ router.post("/register", async (req, res, next) => {
   }
 );
 
-// WORK`s !
 router.post("/login", async (req, res, next) => {
   try {
     // check that username exists
@@ -76,7 +74,6 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-// WORK`s !
 router.get("/logout", function (req, res) {
   try {
     req.session.reset(); // reset the session info --> send cookie when  req.session == undefined!!
