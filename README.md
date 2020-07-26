@@ -40,10 +40,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
 ### Main page
-
-  <gif src="images/favoriteGif.GIF" width="800"  alt="accessibility text">
-
-
 <p align="center">
   <img src="images/main.PNG" width="800"  title="hover text">
   <img src="images/main2.PNG" width="800"  alt="accessibility text">
@@ -51,9 +47,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Search Page
 <p align="center">
-  <img src="images/search.PNG" width="800" height="500" title="hover text">
-    <img src="images/main2.PNG" width="800"  alt="accessibility text">
-
+  <img src="images/search.PNG" width="600" height="500" title="hover text">
   ![ezgif com-crop (1)](https://user-images.githubusercontent.com/57832721/88471928-157e0800-cf17-11ea-9e66-3b2eb3bfd3f2.gif)
 </p>
 
@@ -68,7 +62,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Favorites recipes
 <p align="center">
-  <img src="images/favorites.PNG" width="800" height="500"  title="hover text">
+  <img src="images/favorites.PNG" width="600" height="500"  title="hover text">
 </p>
 ### Full recipe
 <p align="center">
